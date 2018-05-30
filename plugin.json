@@ -1,0 +1,8 @@
+{
+  "name": "SowGenerator",
+  "description": "Builds Statement of Work documents similar to how reports are generated",
+  "link": "/master/services",
+  "enabled": true,
+  "report_view": true,
+  "admin_view": true
+}

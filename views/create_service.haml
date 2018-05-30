@@ -1,0 +1,40 @@
+.span10
+  %br
+  %h2 New Service
+  %br
+  %br
+  %form{ :class => "form-horizontal", :method => 'post', :enctype => 'application/x-www-form-urlencoded'}
+    .control-group
+      %label{ :class => "control-label", :for => "title" } Title
+      .controls
+        %input{ :type => 'text', :name => 'title', :value => ""}
+    .control-group
+      %label{ :class => "control-label", :for => "type" } Service Type
+      .controls
+        %select{ :name => "type" }
+          - @plugin_options['service_types'].each do |type|
+            %option #{type}
+    - if !@master
+      .control-group
+        %label{ :class => "control-label", :for => "units" } Units (IPs, webpages, etc.)
+        .controls
+          %input{ :type => 'number', :name => 'units', :value => "", :required => true}
+      .control-group
+        %label{ :class => "control-label", :for => "rate" } Overide Hourly Rate
+        .controls
+          %input{ :type => 'number', :name => 'rate', :value => ""}
+    .control-group
+      %label{ :class => "control-label", :for => "rate" } Hourly rate
+      .controls
+        %input{ :type => 'number', :name => 'rate', :value => "", :required => true}
+    .control-group
+      %label{ :class => "control-label", :for => "description" } Description
+      .controls
+        %textarea{ :rows => '10', :class => 'input-xxlarge', :name => 'description'}
+    - if !@master
+      .control-group
+        %label{ :class => "control-label", :for => "notes" } Notes
+        .controls
+          %textarea{ :rows => '10', :class => 'input-xxlarge', :id => 'notes', :name => 'notes'}
+    %input{:type => 'submit', :value => 'Save'}
+    %button{:value => 'Cancel'} Cancel

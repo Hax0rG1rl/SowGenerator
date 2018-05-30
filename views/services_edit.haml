@@ -1,0 +1,51 @@
+.span10
+  %br
+  %h2 #{@service.title}
+  %br
+  %br
+  %form{ :class => "form-horizontal", :method => 'post', :enctype => 'application/x-www-form-urlencoded'}
+    .control-group
+      %label{ :class => "control-label", :for => "title" } Title
+      .controls
+        %input{ :type => 'text', :name => 'title', :value => "#{@service.title}"}
+    .control-group
+      %label{ :class => "control-label", :for => "type" } Service Type
+      .controls
+        %select{ :name => "type" }
+          - @plugin_options['service_types'].each do |type|
+            - if type == @service.type 
+              %option{:selected => "selected"} #{type}
+            - else
+              %option #{type}
+    - if !@master
+      .control-group
+        %label{ :class => "control-label", :for => "units" } Units (IPs, webpages, etc.)
+        .controls
+          %input{ :type => 'number', :name => 'units', :value => "#{@service.units}", :required => true}
+      .control-group
+        %label{ :class => "control-label", :for => "rate" } Overide Hourly Rate (Current rate: #{@service.rate})
+        .controls
+          %input{ :type => 'number', :name => 'rate', :value => "#{@service.rate}"}
+    - else
+      .control-group
+        %label{ :class => "control-label", :for => "rate" } Hourly rate
+        .controls
+          %input{ :type => 'number', :name => 'rate', :value => "#{@service.rate}", :required => true}
+    .control-group
+      %label{ :class => "control-label", :for => "description" } Description
+      .controls
+        %textarea{ :rows => '10', :class => 'input-xxlarge', :name => 'description'}
+          - if @service
+            - if @service.description
+              #{meta_markup(@service.description)}
+    - if !@master
+      .control-group
+        %label{ :class => "control-label", :for => "notes" } Notes
+        .controls
+          %textarea{ :rows => '10', :class => 'input-xxlarge', :id => 'notes', :name => 'notes'}
+            -if @service
+              - if @service.notes
+                #{meta_markup(@service.notes)}
+    %input{:type => 'submit', :value => 'Save'}
+    %button{:value => 'Cancel'} Cancel
+
