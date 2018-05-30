@@ -371,10 +371,10 @@ class Server < Sinatra::Application
     # Query for the first report matching the report_name
     @report = get_report(id)
     @templates = Xslt.all(order: [:report_type.asc])
-    @plugin_side_menu = get_plugin_list
+    @plugin_side_menu = get_plugin_list('user')
     @assessment_types = config_options['report_assessment_types']
     @languages = config_options['languages']
-    @risk_scores = %w[Risk DREAD CVSS CVSSv3 RiskMatrix]
+    @risk_scores = %w[Risk DREAD CVSS CVSSv3 RiskMatrix NIST800]
 
     # is this report a sow
     @sow = is_report_sow(@report)
